@@ -1,0 +1,41 @@
+<% if(success && success.length) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert" id="successAlert">
+    <%= success %>
+  </div>
+  <% } %>
+  
+  <% if(error && error.length) { %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorAlert">
+    <%= error %>
+  </div>
+  <% } %>
+  
+  <script>
+  function fadeOutAlert(alertId) {
+    var alertElement = document.getElementById(alertId);
+  
+    if (alertElement) {
+      var opacity = 1;
+      var fadeInterval = 50; // Interval time for the fade-out effect in milliseconds
+      var fadeStep = 0.05; // Opacity decrease step
+  
+      var fadeOut = function() {
+        opacity -= fadeStep;
+        alertElement.style.opacity = opacity;
+  
+        if (opacity <= 0) {
+          clearInterval(intervalId);
+          alertElement.style.display = 'none';
+        }
+      };
+  
+      var intervalId = setInterval(fadeOut, fadeInterval);
+    }
+  }
+  
+  setTimeout(function() {
+    fadeOutAlert('successAlert');
+    fadeOutAlert('errorAlert');
+  }, 2000); // 2000 milliseconds = 2 seconds
+  </script>
+  
